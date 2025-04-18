@@ -1,7 +1,6 @@
-package com.techzen.academy_n0325c1.ExerciseDay1.Exercise4;
+package com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,25 +16,25 @@ public class EmployeeConTroller {
     private final List<Employee> employees = new ArrayList<>(
             Arrays.asList(
                     new Employee(UUID.randomUUID(), "Hoàng Văn Hải", LocalDate.of( 1990,  1, 15),
-                            Employee.Gender.MALE,  15000000.00),
+                            Gender.MALE,  15000000.00, "0975123542"),
                     new Employee(UUID.randomUUID(), "Trần Thị Hoài", LocalDate.of( 1985,  5, 20),
-                            Employee.Gender.FEMALE,  14500000.00),
+                            Gender.FEMALE,  14500000.00, "096786968"),
                     new Employee(UUID.randomUUID(), "Lê Văn Sỹ", LocalDate.of( 1992,  3, 10),
-                            Employee.Gender.MALE,  15500000.00),
+                            Gender.MALE,  15500000.00, "0988881110"),
                     new Employee(UUID.randomUUID(), "Phạm Duy Khánh", LocalDate.of( 1988,  7, 5),
-                            Employee.Gender.FEMALE,  14800000.00),
+                            Gender.FEMALE,  14800000.00, "0986555333"),
                     new Employee(UUID.randomUUID(), "Hoàng Văn Hải", LocalDate.of( 1995,  9, 25),
-                            Employee.Gender.MALE,  15200000.00)
+                            Gender.MALE,  15200000.00, "0973388668")
             )
     );
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAll() {
+    public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(employees);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getById(@PathVariable("id") UUID id) {
+    public ResponseEntity<?> getById(@PathVariable("id") UUID id) {
         return employees.stream() // Filtering: Lọc các phần tử thỏa mãn điều kiện.
                 .filter(e -> e.getId().equals(id))
                 .findFirst()
