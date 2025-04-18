@@ -1,5 +1,8 @@
 package com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.controller;
 
+import com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.dto.JsonResponse;
+import com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.exception.AppExepciton;
+import com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.exception.Errorcode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,23 +37,24 @@ public class EmployeeConTroller {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") UUID id) {
+    public ResponseEntity<?> getById(@PathVariable("id") UUID id) throws AppExepciton {
         return employees.stream() // Filtering: Lọc các phần tử thỏa mãn điều kiện.
                 .filter(e -> e.getId().equals(id))
                 .findFirst()
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .map(JsonResponse::ok)
+                .orElseThrow(() -> new AppExepciton(Errorcode.EMPLOYEE_NOT_EXIST));
+//        orElse(ResponseEntity.notFound().build())
     }
 
     @PostMapping
-    public ResponseEntity<Employee> create(@RequestBody Employee employee) {
+    public ResponseEntity<?> create(@RequestBody Employee employee) {
         employee.setId(UUID.randomUUID());
         employees.add(employee);
-        return ResponseEntity.status(HttpStatus.CREATED).body(employee);
+        return JsonResponse.created(employee);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> update(@PathVariable("id") UUID id, @RequestBody Employee employee) {
+    public ResponseEntity<?> update(@PathVariable("id") UUID id, @RequestBody Employee employee) throws AppExepciton {
         return employees.stream()
                 .filter(e -> e.getId().equals(id))
                 .findFirst()
@@ -59,9 +63,11 @@ public class EmployeeConTroller {
                     e.setDOB(employee.getDOB());
                     e.setGender(employee.getGender());
                     e.setSalary(employee.getSalary());
-                    return ResponseEntity.ok(e);
+                    e.setPhone(employee.getPhone());
+
+                    return JsonResponse.ok(e);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new AppExepciton(Errorcode.EMPLOYEE_NOT_EXIST));
     }
 
     @DeleteMapping("/{id}")
@@ -71,7 +77,7 @@ public class EmployeeConTroller {
                 .findFirst()
                 .map(s ->{
                     employees.remove(s);
-                    return ResponseEntity.ok().build();
+                    return JsonResponse.noContent();
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
