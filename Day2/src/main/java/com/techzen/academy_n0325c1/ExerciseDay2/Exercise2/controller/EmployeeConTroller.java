@@ -1,9 +1,8 @@
-package com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.controller;
+package com.techzen.academy_n0325c1.ExerciseDay2.Exercise2.controller;
 
-import com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.dto.JsonResponse;
-import com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.exception.AppExepciton;
-import com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.exception.Errorcode;
-import org.springframework.http.HttpStatus;
+import com.techzen.academy_n0325c1.ExerciseDay2.Exercise2.dto.JsonResponse;
+import com.techzen.academy_n0325c1.ExerciseDay2.Exercise2.exception.AppExepciton;
+import com.techzen.academy_n0325c1.ExerciseDay2.Exercise2.exception.Errorcode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

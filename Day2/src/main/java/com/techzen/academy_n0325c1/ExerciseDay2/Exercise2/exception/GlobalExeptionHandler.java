@@ -1,11 +1,12 @@
-package com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.exception;
+package com.techzen.academy_n0325c1.ExerciseDay2.Exercise2.exception;
 
-import com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.dto.ApiResponse;
+import com.techzen.academy_n0325c1.ExerciseDay2.Exercise2.dto.ApiResponse;
 import lombok.Builder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+@Builder
 @ControllerAdvice // nơi lắng nge lỗi trả về
 public class GlobalExeptionHandler {
     @ExceptionHandler(AppExepciton.class)

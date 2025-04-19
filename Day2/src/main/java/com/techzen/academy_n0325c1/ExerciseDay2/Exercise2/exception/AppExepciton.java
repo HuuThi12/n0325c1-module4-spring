@@ -1,12 +1,10 @@
-package com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.exception;
+package com.techzen.academy_n0325c1.ExerciseDay2.Exercise2.exception;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Getter
-@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AppExepciton extends Exception {
     Errorcode errorcode;

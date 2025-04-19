@@ -1,4 +1,4 @@
-package com.techzen.academy_n0325c1.ExerciseDay2.Exercise1.controller;
+package com.techzen.academy_n0325c1.ExerciseDay2.Exercise2.controller;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,6 +21,5 @@ public class Employee {
     Gender gender;
     double salary;
     String phone;
-    Integer departmentId;
 }
 
