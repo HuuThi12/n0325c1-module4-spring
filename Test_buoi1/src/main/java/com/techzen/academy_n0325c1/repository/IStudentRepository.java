@@ -3,6 +3,7 @@ package com.techzen.academy_n0325c1.repository;
 import com.techzen.academy_n0325c1.model.Student;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IStudentRepository {
      List<Student> finAll();

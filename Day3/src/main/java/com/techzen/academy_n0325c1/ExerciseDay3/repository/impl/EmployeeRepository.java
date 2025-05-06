@@ -37,6 +37,31 @@ public class EmployeeRepository implements IEmployeeRepository {
                         || e.getName().toLowerCase()
                         .contains(employeeSearchRequest.getName().toLowerCase())))
                 .collect(Collectors.toList());
+//         List<Employee> employeeList = new ArrayList<>();
+//        try {
+//            String query = "SELECT id, name, dob, gender, salary, phone, department_id" +
+//                    "FROM employee where 1=1";
+//            List<Object> parameters = new ArrayList<>();
+//            if (employeeSearchRequest.getName() != null) {
+//                query += " AND LOWER(name) LIKE ?";
+//                parameters.add("%" + employeeSearchRequest.getName().toLowerCase() + "%");
+//            }
+//
+//            if (employeeSearchRequest.getGender() != null) {
+//                query += " AND LOWER(gender) LIKE ?";
+//                parameters.add("%" + employeeSearchRequest.getGender() + "%");
+//            }
+//            if (employeeSearchRequest.getPhone() != null) {
+//                query += " AND LOWER(phone) LIKE ?";
+//                parameters.add("%" + employeeSearchRequest.getPhone() + "%");
+//            }
+//
+//            if (employeeSearchRequest.getDepartmentID() != null) {
+//                query += " AND LOWER(gender) LIKE ?";
+//                parameters.add("%" + employeeSearchRequest.getDepartmentID() + "%");
+//            }
+//
+//        }
     }
 
     public Optional<Employee> findById(UUID id) {

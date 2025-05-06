@@ -12,3 +12,4 @@ insert into student values('1','Lê Hữu Thi',8.8);
 insert into student values('2','Phạm Hồng Sơn',7.5);
 insert into student values('3','Nguyễn Văn A',9.2);
 insert into student values('4','Phạm Thị B',8);
+
