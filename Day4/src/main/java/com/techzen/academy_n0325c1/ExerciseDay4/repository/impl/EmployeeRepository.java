@@ -6,7 +6,12 @@ import com.techzen.academy_n0325c1.ExerciseDay4.model.Employee;
 import com.techzen.academy_n0325c1.ExerciseDay4.repository.IEmployeeRepository;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
+
+
+import org.hibernate.query.Query;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -31,61 +36,77 @@ public class EmployeeRepository implements IEmployeeRepository {
     );
 
 
-    public List<Employee> findByAttributes(EmployeeSearchRequest employeeSearchRequest) {
-        return employees.stream()
-                .filter(e -> (employeeSearchRequest.getName() == null
-                        || e.getName().toLowerCase()
-                        .contains(employeeSearchRequest.getName().toLowerCase())))
-                .collect(Collectors.toList());
-//         List<Employee> employeeList = new ArrayList<>();
-//        try {
-//            String query = "SELECT id, name, dob, gender, salary, phone, department_id" +
-//                    "FROM employee where 1=1";
-//            List<Object> parameters = new ArrayList<>();
-//            if (employeeSearchRequest.getName() != null) {
-//                query += " AND LOWER(name) LIKE ?";
-//                parameters.add("%" + employeeSearchRequest.getName().toLowerCase() + "%");
-//            }
-//
-//            if (employeeSearchRequest.getGender() != null) {
-//                query += " AND LOWER(gender) LIKE ?";
-//                parameters.add("%" + employeeSearchRequest.getGender() + "%");
-//            }
-//            if (employeeSearchRequest.getPhone() != null) {
-//                query += " AND LOWER(phone) LIKE ?";
-//                parameters.add("%" + employeeSearchRequest.getPhone() + "%");
-//            }
-//
-//            if (employeeSearchRequest.getDepartmentID() != null) {
-//                query += " AND LOWER(gender) LIKE ?";
-//                parameters.add("%" + employeeSearchRequest.getDepartmentID() + "%");
-//            }
-//
-//        }
+    public List<Employee> findByAttributes(EmployeeSearchRequest request) {
+        Session session = ConnectionUtil.sessionFactory.openSession();
+
+        // sử dụng HQL
+        String hql = "FROM Employee e LEFT JOIN FETCH e.department WHERE"
+                + "(:name IS NULL OR lower(e.name) LIKE CONCAT('%', :name, '%')"
+                + "AND (:dobFrom IS NULL OR e.dob >= dobFrom)"
+                + "AND (:doTo IS NULL OR e.dob >= doTo)"
+                + "AND (:gender IS NULL OR e.gender = :gender)"
+                + "AND (:phone IS NULL OR e.phone >= LIKE CONCAT('%', :phone, '%'))"
+                + "AND (:department IS NULL OR e.department.id = :departmentId)";
+
+        // xử lý salary range
+        if (request.getSalaryRange() != null) {
+            hql += "AND (";
+            switch (request.getSalaryRange()) {
+                case "lt5":
+                    hql += " e.salary < 5000000";
+                    break;
+                case "5-10":
+                    hql = " e.salary >= 5000000 AND e.salary < 10000000";
+                case "10-20":
+                    hql = " e.salary >= 10000000 AND e.salary <= 20000000";
+                case "20":
+                    hql = " e.salary > 20000000 ";
+                    break;
+            }
+            hql += ")";
+        }
+
+        Query<Employee> query = session.createQuery(hql, Employee.class);
+
+        // Đặt giá trị cho tham số
+        query.setParameter("name", request.getName());
+        query.setParameter("dobFrom", request.getDobFrom());
+        query.setParameter("dobTo", request.getDobTo());
+        query.setParameter("gender", request.getGender());
+        query.setParameter("phone", request.getPhone());
+        query.setParameter("departmentId", request.getDepartmentID());
+
+        return query.getResultList();
     }
+
 
     public Optional<Employee> findById(UUID id) {
-        return employees.stream()
-                .filter(e -> e.getId().equals(id))
-                .findFirst();
+        Session session = ConnectionUtil.sessionFactory.openSession();
+        String sql = "SELECT * FROM Student WHERE id = :id";
+        Query<Employee> query = session.createNativeQuery(sql, Employee.class);
+
+        query.setParameter("id", id); // Chuyển đổi UUID thành String
+
+        return query.uniqueResultOptional();
     }
 
-    public Employee save(Employee employee) {
-        return findById(employee.getId())
-                .map(e -> {
-                    e.setName(employee.getName());
-                    e.setDOB(employee.getDOB());
-                    e.setGender(employee.getGender());
-                    e.setSalary(employee.getSalary());
-                    e.setPhone(employee.getPhone());
-                    e.setDepartmentId(employee.getDepartmentId());
-                    return e;
-                })
-                .orElseGet(() -> {
-                    employee.setId(UUID.randomUUID());
-                    employees.add(employee);
-                    return employee;
-                });
+    public Employee save(Employee student) {
+        try (Session session = ConnectionUtil.sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            try {
+
+                session.saveOrUpdate(student);
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback(); // Rollback nếu có lỗi
+                }
+                throw new RuntimeException(e);
+            }
+        }
+        return student;
     }
 
     public void delete(UUID id) {
