@@ -19,24 +19,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/students")
-@AllArgsConstructor // Constructor đây nè
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class StudentController {
 
-    // Cách 2: Tiêm thông qua Constructor
     private final IStudentService studentService; // DI thông qua Constructor
-//    IStudentService studentService ;
-//    @Autowired
-//    public StudentController(IStudentService studentService) {
-//        this.studentService = studentService;
-//    }
-
-
-
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<Student>>> getStudents() {
-//        return ResponseEntity.status(HttpStatus.OK).body(student);
         return ResponseEntity.ok(ApiResponse.<List<Student>>builder()
                 .data(studentService.finAll())
                 .build());
@@ -63,11 +53,5 @@ public class StudentController {
     }
 };
 
-// Không nên viết code ỏ đây vì đây là trường hợp hiếm (ngoại lệ)
-//        return ResponseEntity.status(Errorcode.STUDENT_NOT_EXITS.getStatus()).body(
-//                ApiResponse.<Student>builder()
-//                        .code(Errorcode.STUDENT_NOT_EXITS.getCode())
-//                        .message(Errorcode.STUDENT_NOT_EXITS.getMessage())
-//                        .build()
-//        );
+
 

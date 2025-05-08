@@ -3,6 +3,7 @@ package com.techzen.academy_n0325c1.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.codec.ServerSentEvent;
 
 @Getter
 @Setter
@@ -24,4 +25,6 @@ public class ApiResponse<T>{
         this.code = code;
         this.message = message;
     }
+
+
 }

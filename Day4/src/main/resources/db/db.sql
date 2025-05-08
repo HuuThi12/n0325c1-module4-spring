@@ -1,6 +1,6 @@
 create database employee_management;
 use employee_management;
-
+drop database employee_management;
 -- Tạo bảng department
 CREATE TABLE department
 (
@@ -47,9 +47,11 @@ DELIMITER ;
 -- Chèn dữ liệu vào bảng employee
 INSERT INTO employee (id, name, dob, gender, salary, phone, department_id)
 VALUES
-    (id UUID(), name 'Hoàng Văn Hải', dob '1990-01-15', gender 'MALE', salary 15000000.00, phone '0975123542', department_id 1),
-    (id UUID(), name 'Trần Thị Hoài', dob '1985-05-20', gender 'FEMALE', salary 14500000.00, phone '0967869868', department_id 2),
-    (id UUID(), name 'Lê Văn Sỹ', dob '1992-03-10', gender 'MALE', salary 15000000.00, phone '0988881111', department_id 3),
-    (id UUID(), name 'Phạm Duy Khánh', dob '1988-07-05', gender 'MALE', salary 14000000.00, phone '0965535333', department_id 4),
-    (id UUID(), name 'Hoàng Văn Quang', dob '1995-09-25', gender 'MALE', salary 15000000.00, phone '0973388686', department_id 5);
+    (UUID(), 'Hoàng Văn Hải', '1990-01-15', 'MALE', 15000000.00, '0975123542', 1),
+    (UUID(), 'Trần Thị Hoài', '1985-05-20', 'FEMALE', 14500000.00, '0967869868', 2),
+    (UUID(), 'Lê Văn Sỹ', '1992-03-10', 'MALE', 15000000.00, '0988881111', 3),
+    (UUID(), 'Phạm Duy Khánh', '1988-07-05', 'MALE', 14000000.00, '0965535333', 4);
+
+select * from department;
+select * from employee;
 
