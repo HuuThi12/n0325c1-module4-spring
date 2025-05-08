@@ -22,9 +22,10 @@ public class StudentController {
     private final IStudentService studentService; // DI thông qua Constructor
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Student>>> getStudents() {
+    public ResponseEntity<ApiResponse<List<Student>>> getStudents(
+            @RequestParam(defaultValue = "") String name) {
         return ResponseEntity.ok(ApiResponse.<List<Student>>builder()
-                .data(studentService.finAll())
+                .data(studentService.findByName(name))
                 .build());
     }
 

@@ -29,4 +29,9 @@ public class StudentService implements IStudentService{
     public Student findById(int id) {
         return studentRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public List<Student> findByName(String name) {
+        return studentRepository.findByNameContaining(name);
+    }
 }

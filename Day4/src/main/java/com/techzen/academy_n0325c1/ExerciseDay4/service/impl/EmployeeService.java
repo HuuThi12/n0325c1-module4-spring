@@ -2,7 +2,7 @@ package com.techzen.academy_n0325c1.ExerciseDay4.service.impl;
 
 import com.techzen.academy_n0325c1.ExerciseDay4.dto.employee.EmployeeSearchRequest;
 import com.techzen.academy_n0325c1.ExerciseDay4.model.Employee;
-import com.techzen.academy_n0325c1.ExerciseDay4.repository.impl.EmployeeRepository;
+import com.techzen.academy_n0325c1.ExerciseDay4.repository.IEmployeeRepository;
 import com.techzen.academy_n0325c1.ExerciseDay4.service.IEmployeeService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EmployeeService implements IEmployeeService {
-    EmployeeRepository employeeRepository ;
+    IEmployeeService employeeRepository ;
 
     @Override
     public List<Employee> findByAttributes(EmployeeSearchRequest employeeSearchRequest){
@@ -36,6 +36,6 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void delete(UUID id){
-        employeeRepository.delete(id);
+        employeeRepository.delete(UUID.randomUUID());
     }
 }

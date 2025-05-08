@@ -1,13 +1,13 @@
 package com.techzen.academy_n0325c1.ExerciseDay4.model;
 
 import com.techzen.academy_n0325c1.ExerciseDay4.enums.Gender;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import java.time.LocalDate;
 import java.util.UUID;
 

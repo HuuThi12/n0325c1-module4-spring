@@ -10,4 +10,6 @@ public interface IStudentService {
      Student save(Student student) ;
 
      Student findById(int id);
+
+     List<Student> findByName(String name);
 }

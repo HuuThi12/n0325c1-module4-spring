@@ -18,7 +18,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class DepartmentService implements IDepartmentService {
 
-    IDepartmentRepository departmentRepository;
+    IDepartmentService departmentRepository;
 
     @Override
     public List<Department> findByAttributes(DepartmentSearchRequest departmentSearchRequest){
@@ -37,6 +37,6 @@ public class DepartmentService implements IDepartmentService {
 
     @Override
     public void delete(Integer id){
-        departmentRepository.delete(UUID.randomUUID());
+        departmentRepository.delete(id);
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IStudentRepository extends JpaRepository<Student, Integer> {
-
+    List<Student> findByNameContaining(String name);
 }
