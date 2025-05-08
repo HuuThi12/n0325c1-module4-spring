@@ -5,6 +5,7 @@ import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
 // Khai báo lớp ConnectionUtil để quản lý kết nối đến Hibernate và cơ sở dữ liệu
+@Repository
 public class ConnectionUtil {
     // Đối tượng sessionFactory được sử dụng để quản lý phiên làm việc (Session) trong Hibernate
     public static SessionFactory sessionFactory;
