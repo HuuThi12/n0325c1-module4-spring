@@ -30,7 +30,7 @@ CREATE TABLE employee
         FOREIGN KEY (department_id)
             REFERENCES department (id)
 );
-
+drop table employee;
 -- Trigger để tạo UUID cho employee nếu null
 DELIMITER $$
 CREATE TRIGGER before_insert_employee

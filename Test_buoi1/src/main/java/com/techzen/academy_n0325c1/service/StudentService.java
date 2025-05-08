@@ -2,12 +2,9 @@ package com.techzen.academy_n0325c1.service;
 
 import com.techzen.academy_n0325c1.model.Student;
 import com.techzen.academy_n0325c1.repository.IStudentRepository;
-import com.techzen.academy_n0325c1.repository.StudentRepository;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +19,7 @@ public class StudentService implements IStudentService{
     IStudentRepository studentRepository;
 
     public List<Student> finAll() {
-        return studentRepository.finAll();
+        return studentRepository.findAll();
     }
 
     public Student save(Student student) {
@@ -30,6 +27,6 @@ public class StudentService implements IStudentService{
     }
 
     public Student findById(int id) {
-        return studentRepository.findById(id);
+        return studentRepository.findById(id).orElse(null);
     }
 }

@@ -4,14 +4,10 @@ import com.techzen.academy_n0325c1.dto.ApiResponse;
 import com.techzen.academy_n0325c1.exception.AppException;
 import com.techzen.academy_n0325c1.exception.Errorcode;
 import com.techzen.academy_n0325c1.model.Student;
-import com.techzen.academy_n0325c1.repository.StudentRepository;
 import com.techzen.academy_n0325c1.service.IStudentService;
-import com.techzen.academy_n0325c1.service.StudentService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
