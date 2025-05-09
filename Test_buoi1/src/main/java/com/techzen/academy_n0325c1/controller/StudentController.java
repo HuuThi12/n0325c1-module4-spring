@@ -23,9 +23,10 @@ public class StudentController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<Student>>> getStudents(
-            @RequestParam(defaultValue = "") String name) {
+            @RequestParam(defaultValue = "") String name,
+            Double fromScore, Double toScore) {
         return ResponseEntity.ok(ApiResponse.<List<Student>>builder()
-                .data(studentService.findByName(name))
+                .data(studentService.findByAttr(name, fromScore, toScore))
                 .build());
     }
 

@@ -1,6 +1,3 @@
-create database student_management_n0325c1;
-use student_management_n0325c1;
-
 create table student
 (
     id    int primary key auto_increment,

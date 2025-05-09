@@ -11,5 +11,6 @@ public interface IStudentService {
 
      Student findById(int id);
 
-     List<Student> findByName(String name);
+
+     List<Student> findByAttr(String name, Double fromScore, Double toScore);
 }

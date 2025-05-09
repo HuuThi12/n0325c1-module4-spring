@@ -31,7 +31,9 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public List<Student> findByName(String name) {
-        return studentRepository.findByNameContaining(name);
+    public List<Student> findByAttr(String name, Double fromScore, Double toScore) {
+        return studentRepository.findByAttr( name,fromScore, toScore);
     }
+
+
 }
