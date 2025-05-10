@@ -1,13 +1,12 @@
 package com.techzen.academy_n0325c1.ExerciseDay4.model;
 
 import com.techzen.academy_n0325c1.ExerciseDay4.enums.Gender;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -25,9 +24,12 @@ public class Employee {
     String name;
     // DOB = Date of Birth
     LocalDate DOB;
+    @Column(columnDefinition = "ENUM ('MALE','FEMALE'")
+    @Enumerated(EnumType.STRING)
     Gender gender;
-    double salary;
+    BigDecimal salary;
     String phone;
-    Integer departmentId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    Department department;
 }
 
