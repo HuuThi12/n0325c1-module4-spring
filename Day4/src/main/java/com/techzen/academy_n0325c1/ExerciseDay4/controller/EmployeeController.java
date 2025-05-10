@@ -9,6 +9,9 @@ import com.techzen.academy_n0325c1.ExerciseDay4.service.IEmployeeService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,11 +23,13 @@ import java.util.UUID;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    IEmployeeService employeeService;
+        IEmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<?> getAll(EmployeeSearchRequest employeeSearchRequest) {
-        return JsonResponse.ok(employeeService.findByAttributes(employeeSearchRequest));
+    public ResponseEntity<?> getByAttributes(EmployeeSearchRequest employeeSearchRequest,
+                                    @PageableDefault(size = 20, sort = {"id"},
+                                        direction = Sort.Direction.ASC) Pageable pageable) {
+        return JsonResponse.ok(employeeService.findByAttributes(employeeSearchRequest, pageable));
     }
 
     @GetMapping("/{id}")

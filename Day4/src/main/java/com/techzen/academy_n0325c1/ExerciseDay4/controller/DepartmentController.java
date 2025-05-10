@@ -9,6 +9,9 @@ import com.techzen.academy_n0325c1.ExerciseDay4.service.impl.DepartmentService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +25,10 @@ public class DepartmentController {
 
 
     @GetMapping
-    public ResponseEntity<?> getAll() {
-        return JsonResponse.ok(departmentService.findByAttributes(DepartmentSearchRequest.builder().build()));
+    public ResponseEntity<?> getAll(DepartmentSearchRequest departmentSearchRequest,
+                                    @PageableDefault(size = 20, sort = {"id"},
+                                            direction = Sort.Direction.ASC) Pageable pageable) {
+        return JsonResponse.ok(departmentService.findByAttributes(departmentSearchRequest, pageable));
     }
 
     @GetMapping("/{id}")

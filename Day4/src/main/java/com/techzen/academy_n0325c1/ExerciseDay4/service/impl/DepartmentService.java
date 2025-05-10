@@ -7,6 +7,8 @@ import com.techzen.academy_n0325c1.ExerciseDay4.service.IDepartmentService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,25 +20,27 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class DepartmentService implements IDepartmentService {
 
-    IDepartmentService departmentRepository;
+    IDepartmentRepository departmentRepository;
 
     @Override
-    public List<Department> findByAttributes(DepartmentSearchRequest departmentSearchRequest){
-        return departmentRepository.findByAttributes(departmentSearchRequest);
+    public Page<Department> findByAttributes(DepartmentSearchRequest departmentSearchRequest, Pageable pageable) {
+        return departmentRepository.findByAttributes(departmentSearchRequest.getName(),
+                pageable
+        );
     }
 
     @Override
-    public Optional<Department> findById(Integer id){
+    public Optional<Department> findById(Integer id) {
         return departmentRepository.findById(id);
     }
 
     @Override
-    public Department save(Department department){
+    public Department save(Department department) {
         return departmentRepository.save(department);
     }
 
     @Override
-    public void delete(Integer id){
-        departmentRepository.delete(id);
+    public void delete(Integer id) {
+        departmentRepository.deleteById(id);
     }
 }

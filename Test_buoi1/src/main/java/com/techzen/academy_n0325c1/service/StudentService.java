@@ -5,6 +5,8 @@ import com.techzen.academy_n0325c1.repository.IStudentRepository;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 // @Scope("prototype")  Khi tạo ra 1 đối tượng sẽ ra 1 list Mới
 // vì vật khi khi get/list/students chỉ lấy ra list mới gồm 3 đối tượng ban đầu
 // @Scope("prototype")  là mặc dinh ko cần ghi vào
-public class StudentService implements IStudentService{
+public class StudentService implements IStudentService {
     IStudentRepository studentRepository;
 
     public List<Student> finAll() {
@@ -31,8 +33,8 @@ public class StudentService implements IStudentService{
     }
 
     @Override
-    public List<Student> findByAttr(String name, Double fromScore, Double toScore) {
-        return studentRepository.findByAttr( name,fromScore, toScore);
+    public Page<Student> findByAttr(String name, Double fromScore, Double toScore, Pageable pageable) {
+        return  studentRepository.findByAttr(name, fromScore, toScore, pageable);
     }
 
 

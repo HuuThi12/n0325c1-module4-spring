@@ -10,5 +10,5 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DepartmentSearchRequest {
-    String name;
+    String name = "";
 }

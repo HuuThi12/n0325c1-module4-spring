@@ -1,7 +1,3 @@
-CREATE DATABASE IF NOT EXISTS employee_management_n0325c1;
-USE employee_management_n0325c1;
-drop database employee_management_n0325c1;
-
 CREATE TABLE department
 (
     id   INT AUTO_INCREMENT NOT NULL,

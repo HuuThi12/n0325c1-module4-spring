@@ -7,6 +7,8 @@ import com.techzen.academy_n0325c1.ExerciseDay4.service.IEmployeeService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +19,22 @@ import java.util.UUID;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EmployeeService implements IEmployeeService {
-    IEmployeeService employeeRepository ;
+    IEmployeeRepository employeeRepository ;
 
     @Override
-    public List<Employee> findByAttributes(EmployeeSearchRequest employeeSearchRequest){
-        return employeeRepository.findByAttributes(employeeSearchRequest);
+    public Page<Employee> findByAttributes(EmployeeSearchRequest employeeSearchRequest, Pageable pageable){
+        return employeeRepository.findByAttributes(employeeSearchRequest.getName(),
+                employeeSearchRequest.getDobFrom(),
+                employeeSearchRequest.getDobTo(),
+                employeeSearchRequest.getGender(),
+                employeeSearchRequest.getSalaryRange(),
+                employeeSearchRequest.getPhone(),
+                employeeSearchRequest.getDepartmentId(),
+                pageable
+                );
     }
+
+
 
     @Override
     public Optional<Employee> findById(UUID id){
@@ -36,6 +48,6 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void delete(UUID id){
-        employeeRepository.delete(UUID.randomUUID());
+        employeeRepository.deleteById(id);
     }
 }

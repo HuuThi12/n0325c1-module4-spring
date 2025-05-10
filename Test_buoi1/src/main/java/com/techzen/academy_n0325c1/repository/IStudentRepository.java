@@ -1,6 +1,8 @@
 package com.techzen.academy_n0325c1.repository;
 
 import com.techzen.academy_n0325c1.model.Student;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -24,5 +26,5 @@ public interface IStudentRepository extends JpaRepository<Student, Integer> {
             AND(:fromScore IS NULL OR  score >= :fromScore) 
             AND(:toScore IS NULL OR score <= :toScore)
             """, nativeQuery = true) // -> dùng cấu trúc mysql có thể viết hoa hoặc thường
-    List<Student> findByAttr(String name, Double fromScore, Double toScore);
+    Page<Student> findByAttr(String name, Double fromScore, Double toScore, Pageable pageable);
 }
