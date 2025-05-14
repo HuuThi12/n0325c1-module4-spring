@@ -1,0 +1,27 @@
+package com.techzen.academy_n0325c1.Bai8.dto.page;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class PageCustom<T> {
+    int number;
+    int size;
+    long totalElements;
+    int totalPages;
+
+    public PageCustom(Page<T> page) {
+        this.number = page.getNumber();
+        this.size = page.getSize();
+        this.totalElements = page.getTotalElements();
+        this.totalPages = page.getTotalPages();
+    }
+}
