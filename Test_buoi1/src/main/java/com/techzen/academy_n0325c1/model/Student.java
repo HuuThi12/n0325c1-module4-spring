@@ -17,7 +17,7 @@ import lombok.experimental.FieldDefaults;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private double score;
     private String adress;

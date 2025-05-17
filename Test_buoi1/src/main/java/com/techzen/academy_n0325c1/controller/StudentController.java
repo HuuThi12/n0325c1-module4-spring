@@ -11,6 +11,7 @@ import com.techzen.academy_n0325c1.mapper.IStudentMapper;
 import com.techzen.academy_n0325c1.model.Clazz;
 import com.techzen.academy_n0325c1.model.Student;
 import com.techzen.academy_n0325c1.service.IStudentService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,9 +19,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/students")
@@ -43,7 +48,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<StudentResponse>> save(@RequestBody StudentRequest studentRequest) {
+    public ResponseEntity<?> save(@Valid @RequestBody StudentRequest studentRequest) {
         // B1: chuyển từ request sang entity
         Student student = studentMapper.studentRequestToStudent(studentRequest);
         // B2: Lưu Entity xuống DB
@@ -59,13 +64,13 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<Student>> getStudent(@PathVariable("id") int id) throws AppException {
+    public ResponseEntity<ApiResponse<StudentResponse>> getStudent(@PathVariable("id") int id) throws AppException {
         Student student = studentService.findById(id);
         if (student == null) {
             throw new AppException(Errorcode.STUDENT_NOT_EXITS);
         }
-        return ResponseEntity.ok(ApiResponse.<Student>builder()
-                .data(student)
+        return ResponseEntity.ok(ApiResponse.<StudentResponse>builder()
+                .data(studentMapper.studentToStudentResponse(student))
                 .build());
     }
 };
