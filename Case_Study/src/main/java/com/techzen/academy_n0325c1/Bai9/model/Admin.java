@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
+import java.time.LocalDate;
 
 
 @Entity
@@ -14,12 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class QuanLy {
+public class Admin {
     @Id
-    private String maQL;
-    private String hoTen;
-    private String chucVu;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer adminId;
 
-    @OneToMany(mappedBy = "capBoi")
-    private List<TheThuVien> theThuViens;
+    private String fullName;
+    private String email;
 }

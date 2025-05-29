@@ -1,53 +1,92 @@
-# create database employee_management_n0325c1;
-# use employee_management_n0325c1;
-# drop database employee_management_n0325c1;
+# create database library_management_n0325c1;
+# use library_management_n0325c1;
+# drop database library_management_n0325c1;
 
-CREATE TABLE user
+CREATE TABLE `admin`
 (
-    id       BIGINT AUTO_INCREMENT NOT NULL,
-    name     VARCHAR(255)          NULL,
-    password VARCHAR(255)          NULL,
-    CONSTRAINT pk_user PRIMARY KEY (id)
+    admin_id  INT          NOT NULL,
+    full_name VARCHAR(255) NULL,
+    email     VARCHAR(255) NULL,
+    CONSTRAINT pk_admin PRIMARY KEY (admin_id)
 );
 
-CREATE TABLE department
+CREATE TABLE book
 (
-    id   INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(255)       NULL,
-    CONSTRAINT pk_department PRIMARY KEY (id)
+    book_id          INT          NOT NULL,
+    title            VARCHAR(255) NULL,
+    author           VARCHAR(255) NULL,
+    total_copies     INT          NULL,
+    available_copies INT          NULL,
+    CONSTRAINT pk_book PRIMARY KEY (book_id)
 );
 
-CREATE TABLE employee
+CREATE TABLE card
 (
-    id     BINARY(16)   NOT NULL,
-    name   VARCHAR(255) NULL,
-    dob    date         NULL,
-    gender ENUM ('MALE', 'FEMALE') ,
-    salary DECIMAL NULL, phone VARCHAR(255) NULL,
-    department_id INT NULL, CONSTRAINT pk_employee PRIMARY KEY (id));
+    card_id     INT  NOT NULL,
+    issue_date  date NULL,
+    expiry_date date NULL,
+    CONSTRAINT pk_card PRIMARY KEY (card_id)
+);
 
-ALTER TABLE employee
-    ADD CONSTRAINT FK_EMPLOYEE_ON_DEPARTMENT FOREIGN KEY (department_id) REFERENCES department (id);
+CREATE TABLE damage_report
+(
+    report_id     INT          NOT NULL,
+    student_id    INT          NULL,
+    book_id       INT          NULL,
+    report_date   date         NULL,
+    `description` VARCHAR(255) NULL,
+    CONSTRAINT pk_damagereport PRIMARY KEY (report_id)
+);
 
-# CREATE TABLE department
-# (
-#     id   INT AUTO_INCREMENT NOT NULL,
-#     name VARCHAR(255)       NULL,
-#     CONSTRAINT pk_department PRIMARY KEY (id)
-# );
-#
-# CREATE TABLE employee
-# (
-#     id            BINARY(16)   PRIMARY KEY,
-#     name          VARCHAR(255) NOT NULL,
-#     dob           DATE         NOT NULL,
-#     gender        ENUM('MALE', 'FEMALE') NOT NULL,
-#     salary        DECIMAL(15, 2) NOT NULL,
-#     phone         VARCHAR(15),
-#     department_id INT,
-#     CONSTRAINT fk_department
-#         FOREIGN KEY (department_id)
-#             REFERENCES department (id)
-# );
-#
+CREATE TABLE loan
+(
+    loan_id     INT          NOT NULL,
+    student_id  INT          NULL,
+    book_id     INT          NULL,
+    borrow_date date         NULL,
+    due_date    date         NULL,
+    return_date date         NULL,
+    status      VARCHAR(255) NULL,
+    CONSTRAINT pk_loan PRIMARY KEY (loan_id)
+);
 
+CREATE TABLE penalty
+(
+    penalty_id   INT    NOT NULL,
+    loan_id      INT    NULL,
+    days_overdue INT    NULL,
+    amount       DOUBLE NULL,
+    CONSTRAINT pk_penalty PRIMARY KEY (penalty_id)
+);
+
+CREATE TABLE student
+(
+    student_id INT          NOT NULL,
+    full_name  VARCHAR(255) NULL,
+    email      VARCHAR(255) NULL,
+    phone      VARCHAR(255) NULL,
+    dob        date         NULL,
+    card_id    INT          NULL,
+    CONSTRAINT pk_student PRIMARY KEY (student_id)
+);
+
+ALTER TABLE student
+    ADD CONSTRAINT uc_student_card UNIQUE (card_id);
+
+ALTER TABLE damage_report
+    ADD CONSTRAINT FK_DAMAGEREPORT_ON_BOOK FOREIGN KEY (book_id) REFERENCES book (book_id);
+
+ALTER TABLE damage_report
+    ADD CONSTRAINT FK_DAMAGEREPORT_ON_STUDENT FOREIGN KEY (student_id) REFERENCES student (student_id);
+
+ALTER TABLE loan
+    ADD CONSTRAINT FK_LOAN_ON_BOOK FOREIGN KEY (book_id) REFERENCES book (book_id);
+
+ALTER TABLE loan
+    ADD CONSTRAINT FK_LOAN_ON_STUDENT FOREIGN KEY (student_id) REFERENCES student (student_id);
+
+ALTER TABLE penalty
+    ADD CONSTRAINT FK_PENALTY_ON_LOAN FOREIGN KEY (loan_id) REFERENCES loan (loan_id);
+
+ALTER TABLE student
+    ADD CONSTRAINT FK_STUDENT_ON_CARD FOREIGN KEY (card_id) REFERENCES card (card_id);

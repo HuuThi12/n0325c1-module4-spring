@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Entity
@@ -14,19 +14,14 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MuonSach {
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long maMuon;
+    private Integer cardId;
 
-    @ManyToOne
-    private SinhVien sinhVien;
+    private LocalDate issueDate;
+    private LocalDate expiryDate;
 
-    @ManyToOne
-    private Sach sach;
-
-    private Date ngayMuon;
-    private Date hanTra;
-    private String tinhTrang;
+//    @OneToOne(mappedBy = "card")
+//    private Student student;
 }
-

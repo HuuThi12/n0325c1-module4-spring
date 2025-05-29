@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 
 @Entity
@@ -15,17 +14,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BaoCaoHuHong {
+public class Penalty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long maBaoCao;
+    private Integer penaltyId;
 
     @ManyToOne
-    private SinhVien sinhVien;
+    @JoinColumn(name = "loan_id")
+    private Loan loan;
 
-    @ManyToOne
-    private Sach sach;
-
-    private String moTa;
-    private Date ngayBaoCao;
+    private Integer daysOverdue;
+    private Double amount;
 }
