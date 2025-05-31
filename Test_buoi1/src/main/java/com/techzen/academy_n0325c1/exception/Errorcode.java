@@ -11,7 +11,8 @@ import org.springframework.http.HttpStatus;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum Errorcode {
     STUDENT_NOT_EXITS(40401, "Student is not exist!", HttpStatus.NOT_FOUND),
-    TEACHER_NOT_EXITS(40402, "Teacher is not exist!", HttpStatus.NOT_FOUND);
+    TEACHER_NOT_EXITS(40402, "Teacher is not exist!", HttpStatus.NOT_FOUND),
+    UNAUTHORIZED(40101, "User name or password is incorrect!", HttpStatus.UNAUTHORIZED);
 
     int code;
     String message;
