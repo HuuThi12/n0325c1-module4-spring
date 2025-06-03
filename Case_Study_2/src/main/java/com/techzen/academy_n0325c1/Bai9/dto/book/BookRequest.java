@@ -15,6 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookRequest {
+    Integer bookId;
+
     @NotBlank(message = "Tiêu đề không được để trống")
     String title;
 

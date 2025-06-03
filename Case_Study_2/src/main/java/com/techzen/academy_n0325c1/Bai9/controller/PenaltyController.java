@@ -54,7 +54,7 @@ public class PenaltyController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<PenaltyResponse>> getAdmin(@PathVariable("id") int id) throws AppException {
+    public ResponseEntity<ApiResponse<PenaltyResponse>> getPenalty(@PathVariable("id") int id) throws AppException {
         Penalty penalty = penaltyService.findById(id);
         if (penalty == null) {
             throw new AppException(Errorcode.PENALTY_NOT_EXITS);

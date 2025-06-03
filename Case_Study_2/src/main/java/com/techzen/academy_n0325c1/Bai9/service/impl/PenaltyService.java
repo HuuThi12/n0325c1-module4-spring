@@ -1,6 +1,5 @@
 package com.techzen.academy_n0325c1.Bai9.service.impl;
 
-import com.techzen.academy_n0325c1.Bai9.model.Loan;
 import com.techzen.academy_n0325c1.Bai9.model.Penalty;
 import com.techzen.academy_n0325c1.Bai9.repository.IPenaltyRepository;
 import com.techzen.academy_n0325c1.Bai9.service.IPenaltyService;

@@ -1,5 +1,8 @@
 package com.techzen.academy_n0325c1.Bai9.dto.loan;
 
+import com.techzen.academy_n0325c1.Bai9.dto.book.BookResponse;
+import com.techzen.academy_n0325c1.Bai9.dto.student.StudentResponse;
+import com.techzen.academy_n0325c1.Bai9.model.Student;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,8 +16,8 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LoanResponse {
     Integer loanId;
-    Integer studentId;
-    Integer bookId;
+    StudentResponse student;
+    BookResponse book;
     LocalDate borrowDate;
     LocalDate dueDate;
     LocalDate returnDate;

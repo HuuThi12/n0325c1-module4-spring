@@ -1,4 +1,4 @@
-package com.techzen.academy_n0325c1.Bai9.dto.admin;
+package com.techzen.academy_n0325c1.Bai9.dto.authenticate;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,8 +9,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AdminResponse {
-    Integer adminId;
-    String fullName;
-    String email;
+public class LoginResponse {
+    String token;
 }

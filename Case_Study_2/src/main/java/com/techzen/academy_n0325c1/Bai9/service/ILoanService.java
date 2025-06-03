@@ -1,7 +1,5 @@
 package com.techzen.academy_n0325c1.Bai9.service;
 
-import com.techzen.academy_n0325c1.Bai9.model.Book;
-import com.techzen.academy_n0325c1.Bai9.model.Card;
 import com.techzen.academy_n0325c1.Bai9.model.Loan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -4,7 +4,7 @@
 
 CREATE TABLE `admin`
 (
-    admin_id  INT          NOT NULL,
+    admin_id  INT          auto_increment,
     full_name VARCHAR(255) NULL,
     email     VARCHAR(255) NULL,
     CONSTRAINT pk_admin PRIMARY KEY (admin_id)
@@ -12,7 +12,7 @@ CREATE TABLE `admin`
 
 CREATE TABLE book
 (
-    book_id          INT          NOT NULL,
+    book_id          INT          auto_increment,
     title            VARCHAR(255) NULL,
     author           VARCHAR(255) NULL,
     total_copies     INT          NULL,
@@ -23,7 +23,7 @@ CREATE TABLE book
 
 CREATE TABLE card
 (
-    card_id     INT  NOT NULL,
+    card_id     INT  auto_increment,
     issue_date  date NULL,
     expiry_date date NULL,
     CONSTRAINT pk_card PRIMARY KEY (card_id)
@@ -31,7 +31,7 @@ CREATE TABLE card
 
 CREATE TABLE damage_report
 (
-    report_id     INT          NOT NULL,
+    report_id     INT          auto_increment,
     report_date   date         NULL,
     `description` VARCHAR(255) NULL,
     student_id    INT          NULL,
@@ -41,7 +41,7 @@ CREATE TABLE damage_report
 
 CREATE TABLE loan
 (
-    loan_id     INT          NOT NULL,
+    loan_id     INT          AUTO_INCREMENT,
     borrow_date date         NULL,
     due_date    date         NULL,
     return_date date         NULL,
@@ -53,7 +53,7 @@ CREATE TABLE loan
 
 CREATE TABLE penalty
 (
-    penalty_id   INT    NOT NULL,
+    penalty_id   INT    auto_increment,
     days_overdue INT    NULL,
     amount       DOUBLE NULL,
     loan_id      INT    NULL,
@@ -62,7 +62,7 @@ CREATE TABLE penalty
 
 CREATE TABLE student
 (
-    student_id INT          NOT NULL,
+    student_id INT          auto_increment,
     full_name  VARCHAR(255) NULL,
     email      VARCHAR(255) NULL,
     phone      VARCHAR(255) NULL,

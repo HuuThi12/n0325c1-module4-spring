@@ -16,7 +16,8 @@ public enum Errorcode {
     CARD_NOT_EXITS(40404, "Card is not exist!", HttpStatus.NOT_FOUND),
     LOAN_NOT_EXITS(40405, "Loan is not exist!", HttpStatus.NOT_FOUND),
     PENALTY_NOT_EXITS(40406, "Penalty is not exist!", HttpStatus.NOT_FOUND),
-    DAMAGE_REPORT_NOT_EXITS(40406, "Damage Report is not exist!", HttpStatus.NOT_FOUND);
+    DAMAGE_REPORT_NOT_EXITS(40406, "Damage Report is not exist!", HttpStatus.NOT_FOUND),
+    UNAUTHORIZED(40101, "User name or password is incorrect!", HttpStatus.UNAUTHORIZED);
 
 
     int code;

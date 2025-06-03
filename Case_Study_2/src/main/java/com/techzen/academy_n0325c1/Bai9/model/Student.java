@@ -30,9 +30,9 @@ public class Student {
     @JoinColumn(name = "card_id", unique = true)
     private Card card;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<Loan> loans;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<DamageReport> damageReports;
 }

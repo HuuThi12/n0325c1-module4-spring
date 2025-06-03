@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 @Repository
 public interface IStudentRepository extends JpaRepository<Student, Integer> {
+
     @Query(value = """
             select * from student 
             where full_name like concat('%', :fullName, '%')

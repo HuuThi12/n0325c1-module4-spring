@@ -2,15 +2,12 @@ package com.techzen.academy_n0325c1.Bai9.controller;
 
 
 import com.techzen.academy_n0325c1.Bai9.dto.ApiResponse;
-import com.techzen.academy_n0325c1.Bai9.dto.book.BookRequest;
-import com.techzen.academy_n0325c1.Bai9.dto.book.BookResponse;
 import com.techzen.academy_n0325c1.Bai9.dto.loan.LoanRequest;
 import com.techzen.academy_n0325c1.Bai9.dto.loan.LoanResponse;
 import com.techzen.academy_n0325c1.Bai9.dto.page.PageResponse;
 import com.techzen.academy_n0325c1.Bai9.exception.AppException;
 import com.techzen.academy_n0325c1.Bai9.exception.Errorcode;
 import com.techzen.academy_n0325c1.Bai9.mapper.ILoanMapper;
-import com.techzen.academy_n0325c1.Bai9.model.Book;
 import com.techzen.academy_n0325c1.Bai9.model.Loan;
 import com.techzen.academy_n0325c1.Bai9.service.ILoanService;
 import jakarta.validation.Valid;
@@ -60,7 +57,7 @@ public class LoanController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<LoanResponse>> getBook(@PathVariable("id") int id) throws AppException {
+    public ResponseEntity<ApiResponse<LoanResponse>> getLoan(@PathVariable("id") int id) throws AppException {
         Loan loan = loanService.findById(id);
         if (loan == null) {
             throw new AppException(Errorcode.LOAN_NOT_EXITS);

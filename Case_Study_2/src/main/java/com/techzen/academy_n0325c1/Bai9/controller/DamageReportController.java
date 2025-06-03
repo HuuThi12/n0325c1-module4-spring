@@ -1,16 +1,12 @@
 package com.techzen.academy_n0325c1.Bai9.controller;
 
 import com.techzen.academy_n0325c1.Bai9.dto.ApiResponse;
-import com.techzen.academy_n0325c1.Bai9.dto.book.BookRequest;
-import com.techzen.academy_n0325c1.Bai9.dto.book.BookResponse;
 import com.techzen.academy_n0325c1.Bai9.dto.damagereport.DamageReportRequest;
 import com.techzen.academy_n0325c1.Bai9.dto.damagereport.DamageReportResponse;
 import com.techzen.academy_n0325c1.Bai9.dto.page.PageResponse;
-import com.techzen.academy_n0325c1.Bai9.dto.penalty.PenaltyRequest;
 import com.techzen.academy_n0325c1.Bai9.exception.AppException;
 import com.techzen.academy_n0325c1.Bai9.exception.Errorcode;
 import com.techzen.academy_n0325c1.Bai9.mapper.IDamageReportMapper;
-import com.techzen.academy_n0325c1.Bai9.model.Book;
 import com.techzen.academy_n0325c1.Bai9.model.DamageReport;
 import com.techzen.academy_n0325c1.Bai9.service.IDamageReportService;
 import jakarta.validation.Valid;

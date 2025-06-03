@@ -1,8 +1,5 @@
 package com.techzen.academy_n0325c1.Bai9.service.impl;
 
-import com.techzen.academy_n0325c1.Bai9.dto.book.BookRequest;
-import com.techzen.academy_n0325c1.Bai9.dto.book.BookResponse;
-import com.techzen.academy_n0325c1.Bai9.mapper.IBookMapper;
 import com.techzen.academy_n0325c1.Bai9.model.Book;
 import com.techzen.academy_n0325c1.Bai9.repository.IBookRepository;
 import com.techzen.academy_n0325c1.Bai9.service.IBookService;
@@ -14,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

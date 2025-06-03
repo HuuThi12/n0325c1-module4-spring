@@ -28,13 +28,13 @@ public class Book {
     private Integer availableCopies;
 
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Loan> loans;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<DamageReport> damageReports;
 }

@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StudentRequest {
+    Integer studentId;
     @NotBlank(message = "Tên không được để trống")
     @Pattern(regexp = "[a-zA-ZÀ-ỹ ]+", message = "Tên không được chứa ký tự đặc biệt")
     @Length(min = 3, message = "Tên phải lớn hơn 3 ký tự")

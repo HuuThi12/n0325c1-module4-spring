@@ -26,14 +26,14 @@ public class Loan {
     LocalDate returnDate;
     String status;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @OneToMany(mappedBy = "loan")
+    @OneToMany(mappedBy = "loan", cascade = CascadeType.ALL)
     private List<Penalty> penalties;
 }

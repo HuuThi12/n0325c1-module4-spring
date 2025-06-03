@@ -23,7 +23,7 @@ public class Admin {
     private String fullName;
     private String email;
 
-    @OneToMany(mappedBy = "admin")
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
     private List<Book> books;
 
 //    @OneToMany(mappedBy = "admin")
